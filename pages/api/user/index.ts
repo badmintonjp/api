@@ -1,4 +1,4 @@
-import User from "@/models/users";
+import { usersDB } from "@/lib/mongoDB";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type User = {
@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const users = await (await User()).find().toArray();
+    const users = await usersDB.find().toArray();
     res.send(users);
   } catch (error) {
     console.log(error);

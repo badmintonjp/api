@@ -1,9 +1,15 @@
-import clientPromise from "@/lib/mongoDB";
+// import clientPromise from "@/lib/mongoDB";
+// import { Collection } from "mongodb";
 
-export default async function User() {
-  const client = await clientPromise;
-  const collection = client.db("main").collection<{
-    name: string;
-  }>("users");
-  return collection;
-}
+// export default function User() {
+//   return new Promise<Collection<{
+//     name: string;
+// }>>((rs) => {
+//     clientPromise.then((cl) => {
+//       rs(
+//         cl.db("main").collection<any>("users")
+//       );
+//     });
+//   });
+// }
+export default () => {};
