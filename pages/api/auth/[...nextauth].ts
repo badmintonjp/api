@@ -2,11 +2,12 @@ import NextAuth from "next-auth";
 // import Auth0Provider from "next-auth/providers/auth0";
 import FacebookProvider from "next-auth/providers/facebook";
 import GithubProvider from "next-auth/providers/github";
-// import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider from "next-auth/providers/google";
 // import TwitterProvider from "next-auth/providers/twitter";
 // import EmailProvider from "next-auth/providers/email";
 // import AppleProvider from "next-auth/providers/apple"
-import InstagramProvider from "next-auth/providers/instagram";
+// import InstagramProvider from "next-auth/providers/instagram";
+import MongoDBAdapter from "@/lib/AuthAdapter";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -44,18 +45,18 @@ export default NextAuth({
       // @ts-ignore
       scope: "read:user",
     }),
-    // GoogleProvider({
-    //   clientId: String(process.env.GOOGLE_ID),
-    //   clientSecret: String(process.env.GOOGLE_SECRET),
-    // }),
+    GoogleProvider({
+      clientId: String(process.env.GOOGLE_ID),
+      clientSecret: String(process.env.GOOGLE_SECRET),
+    }),
     // TwitterProvider({
     //   clientId: String(process.env.TWITTER_ID),
     //   clientSecret: String(process.env.TWITTER_SECRET),
     // }),
-    InstagramProvider({
-      clientId: String(process.env.INSTAGRAM_CLIENT_ID),
-      clientSecret: String(process.env.INSTAGRAM_CLIENT_SECRET),
-    }),
+    // InstagramProvider({
+    //   clientId: String(process.env.INSTAGRAM_CLIENT_ID),
+    //   clientSecret: String(process.env.INSTAGRAM_CLIENT_SECRET),
+    // }),
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/databases
@@ -64,7 +65,7 @@ export default NextAuth({
   // * You must install an appropriate node_module for your database
   // * The Email provider requires a database (OAuth providers do not)
   // database: String(process.env.DATABASE_URL),
-
+  adapter: MongoDBAdapter(),
   // The secret should be set to a reasonably long random string.
   // It is used to sign cookies and to sign and encrypt JSON Web Tokens, unless
   // a separate secret is defined explicitly for encrypting the JWT.
@@ -117,7 +118,6 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log({ user, account, profile, email, credentials });
       return true;
     },
     // async redirect({ url, baseUrl }) { return baseUrl },

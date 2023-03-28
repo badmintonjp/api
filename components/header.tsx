@@ -5,9 +5,17 @@ export default function Header() {
   const { data: session } = useSession();
 
   return (
-    <header>
-      <nav>
+    <header className="bg-rose-600 text-white">
+      <nav className="flex justify-between container mx-auto">
         <ul className="flex gap-2">
+          <li>
+            <Image
+              src={`/badminton.svg`}
+              alt="Picture of the author"
+              width={50}
+              height={50}
+            />
+          </li>
           <li>
             <Link href="/">Home</Link>
           </li>
