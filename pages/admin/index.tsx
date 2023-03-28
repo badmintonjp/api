@@ -3,10 +3,11 @@ import Layout from "@/components/layout";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-export default function Page() {
+export default function Admin() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const [content, setContent] = useState();
+  console.log(session);
 
   // Fetch content from protected route
   useEffect(() => {
@@ -24,11 +25,11 @@ export default function Page() {
   if (loading) return null;
   return (
     <Layout>
-      {session ? (
+      {!session ? (
         <AccessDenied />
       ) : (
         <>
-          <h1>Protected Page</h1>
+          <h1>Admin Page</h1>
           <p>
             <strong>{content || "\u00a0"}</strong>
           </p>
