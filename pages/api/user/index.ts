@@ -1,10 +1,6 @@
 import { usersDB } from "@/lib/mongoDB";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type User = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
