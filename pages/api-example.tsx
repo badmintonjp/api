@@ -14,9 +14,6 @@ export default function Page() {
       <h2>JSON Web Token</h2>
       <p>/api/examples/jwt</p>
       <iframe src="/api/examples/jwt" />
-      <h2>User</h2>
-      <p>/api/user</p>
-      <iframe src="/api/user" />
     </Layout>
   );
 }

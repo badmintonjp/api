@@ -1,14 +1,14 @@
 import AccessDenied from "@/components/access-denied";
 import Layout from "@/components/layout";
-import { useSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
+import { Session } from "next-auth";
+import { getSession, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function Admin() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const [content, setContent] = useState();
-  console.log(session);
-
   // Fetch content from protected route
   useEffect(() => {
     const fetchData = async () => {
@@ -38,3 +38,12 @@ export default function Admin() {
     </Layout>
   );
 }
+export const getServerSideProps: GetServerSideProps<{
+  session: Session | null;
+}> = async (context) => {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
+};
